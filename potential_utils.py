@@ -10,6 +10,12 @@ import warnings
 
 import pdb
 
+#tell it where the C shared library is, and load it
+#exec_call = os.path.join(os.environ['HOME'],"python/CPotential/src/c_potential.so")
+exec_call = os.path.join(os.environ['HOME'],"Documents/Research/Gizmo/CPotential/src/c_potential.so")
+c_obj = ctypes.CDLL(exec_call)
+
+
 def enter(sleep_time=1):
     init_time = time.time()
     while time.time() - init_time < sleep_time:
@@ -50,8 +56,8 @@ def subCalculateCPairwiseDistancesSquared(
     print(Ntest,'this run -> ',arr_size,'many distances')
 
     ## call the c executable
-    exec_call = os.path.join(os.environ['HOME'],"python/CPotential/src/c_potential.so")
-    c_obj = ctypes.CDLL(exec_call)
+    #exec_call = os.path.join(os.environ['HOME'],"python/CPotential/src/c_potential.so")
+    #c_obj = ctypes.CDLL(exec_call)
 
     print("Calling the C executable...",)
     c_obj.calcTestPairwiseDistsSquared(
@@ -124,8 +130,8 @@ def calculateCPairwiseDistancesSquared(all_pos,ncutoff=2e4):
         H_OUT=h_out_cast()
 
         ## call the c executable
-        exec_call = os.path.join(os.environ['HOME'],"python/CPotential/src/c_potential.so")
-        c_obj = ctypes.CDLL(exec_call)
+        #exec_call = os.path.join(os.environ['HOME'],"python/CPotential/src/c_potential.so")
+        #c_obj = ctypes.CDLL(exec_call)
 
         print("Calling the C executable...",)
         c_obj.calcPairwiseDistsSquared(
@@ -178,8 +184,8 @@ def calculateCGravity(
     ## call the c executable
 
     ## alternatively can link to this __file__'s location
-    exec_call = os.path.join(os.environ['HOME'],"python/CPotential/src/c_potential.so")
-    c_obj = ctypes.CDLL(exec_call)
+    #exec_call = os.path.join(os.environ['HOME'],"python/CPotential/src/c_potential.so")
+    #c_obj = ctypes.CDLL(exec_call)
 
 
     ## from "extensive" testing this seems to be around the point where you get
@@ -278,8 +284,8 @@ def calculateCPotential(
     ## call the c executable
 
     ## alternatively can link to this __file__'s location
-    exec_call = os.path.join(os.environ['HOME'],"python/CPotential/src/c_potential.so")
-    c_obj = ctypes.CDLL(exec_call)
+    #exec_call = os.path.join(os.environ['HOME'],"python/CPotential/src/c_potential.so")
+    #c_obj = ctypes.CDLL(exec_call)
 
 
     ## from "extensive" testing this seems to be around the point where you get
