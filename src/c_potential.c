@@ -110,7 +110,7 @@ float calculatePotential(float * point, float * masses, float * xs, float * ys, 
     }
     //printf("skipped %d particle(s)\n", nskip);
     //printf("%.3g\n", summ);
-    return -1.0*ALLTOGETHER*summ;//cgs
+    return -1.0*GCGS*CODETOGRAMS/KPCTOCM*summ;//cgs
 }
 
 int calculatePotentialAtLocations(

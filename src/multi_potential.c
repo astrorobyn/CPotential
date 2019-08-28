@@ -7,7 +7,7 @@
 #include "include.h"
 
 #define GCGS 6.674e-8
-#define KPCTOCM 3.08e21
+#define KPCTOCM 3.086e21
 #define CODETOGRAMS 2e43
 
 #define ALLTOGETHER 1.407e-7 // GCGS*CODETOGRAMS/(KPCTOCM*KPCTOCM)
@@ -75,9 +75,16 @@ float multiCalculatePotential(float * point, float * masses, float * xs, float *
         float dz = zs[i]-point[2];
 
         float dr2 = dx*dx + dy*dy + dz*dz;
-        total_pot -= masses[i]/sqrt(dr2); 
+        float dr = sqrt(dr2);
+
+        if(dr>1e-14) {  //skip the particle itself
+
+            total_pot += masses[i]/dr; 
+
+        } 
+         
     }
-    return ALLTOGETHER*total_pot;//cgs
+    return -1.0*GCGS*CODETOGRAMS/KPCTOCM*total_pot;//cgs
 }
 
 int multiCalculateRGravityAtLocations(
