@@ -87,15 +87,30 @@ int calculateRGravityAtLocations(
 
 float calculatePotential(float * point, float * masses, float * xs, float * ys, float * zs,int Narr){
     float summ = 0;
+    //int nskip = 0;
     for (int i =0; i<Narr; i++){
         float dx = xs[i]-point[0];
         float dy = ys[i]-point[1];
         float dz = zs[i]-point[2];
 
         float dr2 = dx*dx + dy*dy + dz*dz;
-        summ -= masses[i]/sqrt(dr2); 
+        float dr = sqrt(dr2);
+
+        if(dr>1e-14) {  //skip the particle itself
+
+            summ += masses[i]/dr; 
+
+        } 
+        //else {
+        //    nskip+=1;
+        //    fprintf(stderr, "skipped dr = %.3g\n", dr);
+        //}
+
+
     }
-    return ALLTOGETHER*summ;//cgs
+    //printf("skipped %d particle(s)\n", nskip);
+    //printf("%.3g\n", summ);
+    return -1.0*ALLTOGETHER*summ;//cgs
 }
 
 int calculatePotentialAtLocations(
@@ -110,6 +125,8 @@ int calculatePotentialAtLocations(
     for (int i=0; i<Ntest; i++){
 
         point[0]=test_xs[i]; point[1]=test_ys[i]; point[2]=test_zs[i];
+
+        //printArray(point, 3);
 
         H_OUT[i]=calculatePotential(point,masses,xs,ys,zs,Narr);
 
