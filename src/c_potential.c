@@ -12,6 +12,9 @@
 
 #define ALLTOGETHER 1.407e-7 // GCGS*CODETOGRAMS/(KPCTOCM*KPCTOCM)
 
+
+#define GGAL 4.302e-6 // kpc (km/s)^2 / Msun
+
 void printArray(float * arr,int Narr){
     for (int i=0; i< Narr; i++){
         printf("%.2f\t",arr[i]);
@@ -110,7 +113,7 @@ float calculatePotential(float * point, float * masses, float * xs, float * ys, 
     }
     //printf("skipped %d particle(s)\n", nskip);
     //printf("%.3g\n", summ);
-    return -1.0*GCGS*CODETOGRAMS/KPCTOCM*summ;//cgs
+    return -1.0*GGAL*summ;// in (km/s)^2
 }
 
 int calculatePotentialAtLocations(

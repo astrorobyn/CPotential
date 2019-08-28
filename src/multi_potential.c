@@ -12,6 +12,8 @@
 
 #define ALLTOGETHER 1.407e-7 // GCGS*CODETOGRAMS/(KPCTOCM*KPCTOCM)
 
+#define GGAL 4.302e-6 // kpc (km/s)^2 / Msun
+
 float multiCalculateGravityZ(float * point, float * masses, float * xs, float * ys, float * zs,int Narr,int nthreads){
     float total_grav = 0;
     int i = 0;
@@ -84,7 +86,7 @@ float multiCalculatePotential(float * point, float * masses, float * xs, float *
         } 
          
     }
-    return -1.0*GCGS*CODETOGRAMS/KPCTOCM*total_pot;//cgs
+    return -1.0*GGAL*total_pot; //in (km/s)^2
 }
 
 int multiCalculateRGravityAtLocations(
